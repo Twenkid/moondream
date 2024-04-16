@@ -89,14 +89,15 @@ class Moondream(PreTrainedModel):
         tokenizer,
         chat_history="",
         result_queue=None,
+        max_new_tokens=256,
         **kwargs,
     ):
         prompt = f"<image>\n\n{chat_history}Question: {question}\n\nAnswer:"
         answer = self.generate(
             image_embeds,
             prompt,
-            tokenizer=tokenizer,
-            max_new_tokens=512,
+            tokenizer=tokenizer, 
+            max_new_tokens=max_new_tokens
             **kwargs,
         )[0]
         cleaned_answer = answer.strip()
